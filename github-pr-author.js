@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Show commit authors
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @updateURL    https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.js
 // @downloadURL  https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.js
 // @description  Show committer and author name in pull requests
@@ -39,11 +39,29 @@
                         if(commits.length === 0) {
                             result = '<span style="color:red">No commits found</span>';
                         } else {
+                            var all = [];
                             $.each(commits, function(index) {
-                                result += '<pre style="border-top:1px solid #e1e4e8">Commit: ' + commits[index].sha.substring(0, 8) + '\n';
+                                var commit_str = commits[index].sha.substring(0, 7);
                                 var commit = commits[index].commit;
-                                result += 'A:<a href="mailto:' + commit.author.email + '">' + commit.author.name + '</a>\n';
-                                result += 'C:<a href="mailto:' + commit.committer.email + '">' + commit.committer.name + '</a></pre>';
+                                var author = 'A:<a href="mailto:' + commit.author.email + '">' + commit.author.name + '</a>\n';
+                                author +=    'C:<a href="mailto:' + commit.committer.email + '">' + commit.committer.name + '</a>';
+
+                                var prev = $.grep(all, function(e) { return e.author == author; });
+                                if (prev.length === 0) {
+                                    all.push({'commit': ['Commit: ', commit_str], 'author': author});
+                                } else {
+                                    var c = prev[0].commit;
+                                    var third = (c.length % 3) === 0;
+                                    c[c.length-1] += (third ? ',\n' : ', ');
+                                    c.push(commit_str);
+                                }
+                            });
+                            $.each(all, function(index) {
+                                var point = all[index];
+                                result += '<pre style="border-top:1px solid #e1e4e8">';
+                                result += point.commit.join('') + '\n';
+                                result += point.author;
+                                result += '</pre>';
                             });
                         }
                     }
