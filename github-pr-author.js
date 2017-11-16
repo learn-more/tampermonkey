@@ -1,7 +1,7 @@
-// ==UserScript==
+ï»¿// ==UserScript==
 // @name         Github improvements
 // @namespace    http://tampermonkey.net/
-// @version      0.6
+// @version      0.7
 // @updateURL    https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.js
 // @downloadURL  https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.js
 // @description  Various github improvements, like: show committer and author name, 'known' authors, etc...
@@ -19,8 +19,8 @@
         'Alexander Rechitskiy': [ [ 'rechitskiy', 'reactos.org' ] ],
         'Amine Khaldi': [ [ 'amine.khaldi', 'reactos.org' ] ],
         'GitHub': [ [ 'noreply', 'github.com' ] ],
-        'Hermès Bélusca-Maïto': [ [ 'hermes.belusca-maito', 'reactos.org' ] ],
-        'Jérôme Gardou': [ [ 'jerome.gardou', 'reactos.org' ] ],
+        'HermÃ¨s BÃ©lusca-MaÃ¯to': [ [ 'hermes.belusca-maito', 'reactos.org' ] ],
+        'JÃ©rÃ´me Gardou': [ [ 'jerome.gardou', 'reactos.org' ] ],
         'Katayama Hirofumi MZ': [ ['katayama.hirofumi.mz', 'gmail.com'] ],
         /*'Labutin Ivan': [ [ 'linuxrf', 'gmail.com' ] ], Wrong name? */
         'Manuel Bachmann': [ [ 'tarnyko', 'tarnyko.net' ] ],
