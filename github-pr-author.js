@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         Github improvements
 // @namespace    http://tampermonkey.net/
-// @version      0.8
+// @version      0.9
 // @updateURL    https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.js
 // @downloadURL  https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.js
 // @description  Various github improvements, like: show committer and author name, 'known' authors, etc...
@@ -22,13 +22,15 @@
         'Amine Khaldi': [ [ 'amine.khaldi', 'reactos.org' ] ],
         'David Quintana': [ [ 'gigaherz', 'gmail.com' ] ],
         'Eric Kohl': [ [ 'eric.kohl', 'reactos.org' ] ],
+        'Ged Murphy': [ [ 'gedmurphy', 'reactos.org' ] ],
         'Giannis Adamopoulos': [ [ 'gadamopoulos', 'reactos.org' ] ],
         'GitHub': [ [ 'noreply', 'github.com' ] ],
         'Hermès Bélusca-Maïto': [ [ 'hermes.belusca-maito', 'reactos.org' ] ],
+        'James Tabor': [ [ 'james.tabor', 'reactos.org' ] ],
         'Jérôme Gardou': [ [ 'jerome.gardou', 'reactos.org' ] ],
         'Joachim Henze': [ [ 'Joachim.Henze', 'reactos.org' ] ],
-        'Katayama Hirofumi MZ': [ ['katayama.hirofumi.mz', 'gmail.com'] ],
-        /*'Labutin Ivan': [ [ 'linuxrf', 'gmail.com' ] ], Wrong name? */
+        'Katayama Hirofumi MZ': [ [ 'katayama.hirofumi.mz', 'gmail.com'] ],
+        'Luo Yufan': [ [ 'njlyf2011', 'hotmail.com' ] ],
         'Manuel Bachmann': [ [ 'tarnyko', 'tarnyko.net' ] ],
         'Mark Jansen': [ [ 'mark.jansen', 'reactos.org' ] ],
         'Pierre Schweitzer': [ [ 'pierre', 'reactos.org' ] ],
