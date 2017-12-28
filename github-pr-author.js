@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         Github improvements
 // @namespace    http://tampermonkey.net/
-// @version      0.9
+// @version      0.10
 // @updateURL    https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.js
 // @downloadURL  https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.js
 // @description  Various github improvements, like: show committer and author name, 'known' authors, etc...
@@ -26,10 +26,12 @@
         'Giannis Adamopoulos': [ [ 'gadamopoulos', 'reactos.org' ] ],
         'GitHub': [ [ 'noreply', 'github.com' ] ],
         'Hermès Bélusca-Maïto': [ [ 'hermes.belusca-maito', 'reactos.org' ] ],
+        'Hermès BÉLUSCA - MAÏTO': [ [ 'hermes.belusca-maito', 'reactos.org' ] ],
         'James Tabor': [ [ 'james.tabor', 'reactos.org' ] ],
         'Jérôme Gardou': [ [ 'jerome.gardou', 'reactos.org' ] ],
         'Joachim Henze': [ [ 'Joachim.Henze', 'reactos.org' ] ],
         'Katayama Hirofumi MZ': [ [ 'katayama.hirofumi.mz', 'gmail.com'] ],
+        'Lauri Ojansivu': [ [ 'x', 'xet7.org' ] ],
         'Luo Yufan': [ [ 'njlyf2011', 'hotmail.com' ] ],
         'Manuel Bachmann': [ [ 'tarnyko', 'tarnyko.net' ] ],
         'Mark Jansen': [ [ 'mark.jansen', 'reactos.org' ] ],
@@ -38,6 +40,7 @@
         'Serge Gautherie': [ ['reactos-git_serge_171003', 'gautherie.fr'] ],
         'Stanislav Motylkov' : [ [ 'x86corez', 'gmail.com'] ],
         'Thomas Faber': [ [ 'thomas.faber', 'reactos.org' ] ],
+        'Timo Kreuzer': [ [ 'timo.kreuzer', 'reactos.org' ] ],
         'Vadim Galyant': [ [ 'vgal', 'rambler.ru' ] ],
     };
     function knownCommitter(user) {
