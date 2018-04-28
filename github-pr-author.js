@@ -20,6 +20,8 @@
         'Alexander Rechitskiy': [ [ 'rechitskiy', 'reactos.org' ] ],
         'Alexander Shaposhnikov': [ [ 'sanchaez', 'reactos.org' ] ],
         'Amine Khaldi': [ [ 'amine.khaldi', 'reactos.org' ] ],
+        'Bișoc George': [ [ 'fraizeraust99', 'gmail.com' ] ],
+        'Colin Finck': [ [ 'colin', 'reactos.org' ] ],
         'David Quintana': [ [ 'gigaherz', 'gmail.com' ] ],
         'Eric Kohl': [ [ 'eric.kohl', 'reactos.org' ] ],
         'Ged Murphy': [ [ 'gedmurphy', 'reactos.org' ] ],
