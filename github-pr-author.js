@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         Github improvements
 // @namespace    http://tampermonkey.net/
-// @version      0.10
+// @version      0.11
 // @updateURL    https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.js
 // @downloadURL  https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.js
 // @description  Various github improvements, like: show committer and author name, 'known' authors, etc...
@@ -70,20 +70,20 @@
         $('#lm_gh_result').remove();
 
         var query = window.location.pathname;
-        var pull_regex = /reactos\/reactos\/pull\/(\d+)/;
+        var pull_regex = /reactos\/(.*)\/pull\/(\d+)/;
         var pull_id = pull_regex.exec(query);
 
         if (pull_id) {
             addBox();
             $.ajax({
-                url: 'https://api.github.com/repos/reactos/reactos/pulls/'+pull_id[1]+'/commits',
+                url: 'https://api.github.com/repos/reactos/' + pull_id[1] + '/pulls/'+pull_id[2]+'/commits',
                 complete: function(xhr) {
                     var result = '';
                     var json = xhr.responseJSON;
                     if (json.message == 'Not Found') {
                         $('#lm_gh_result').html('<span style="color:red">PR not found</span>');
                     } else {
-                        addCommits(json, pull_id[1]);
+                        addCommits(json, pull_id[2]);
                     }
                 }
             });
@@ -115,6 +115,7 @@
 
         function addCommits(commits, pull_id) {
             var result = '';
+            var users = [];
             if(commits.length === 0) {
                 result = '<span style="color:red">No commits found</span>';
             } else {
@@ -122,8 +123,11 @@
                 $.each(commits, function(index) {
                     var commit_str = commits[index].sha.substring(0, 7);
                     var commit = commits[index].commit;
+                    var author_obj = commits[index].author;
+                    var author_username = author_obj != null  ? author_obj.login : '<null>';
                     var author = 'A:<a href="mailto:' + commit.author.email + '">' + commit.author.name + '</a>' + knownCommitter(commit.author) + '\n';
-                    author +=    'C:<a href="mailto:' + commit.committer.email + '">' + commit.committer.name + '</a>' + knownCommitter(commit.committer);
+                    author +=    'C:<a href="mailto:' + commit.committer.email + '">' + commit.committer.name + '</a>' + knownCommitter(commit.committer) + '\n';
+                    author +=    'U:<a href="https://github.com/' + author_username + '" id="commit_user_' + author_username + '">???</a>';
 
                     var prev = $.grep(all, function(e) { return e.author == author; });
                     if (prev.length === 0) {
@@ -133,6 +137,9 @@
                         var third = (c.length % 3) === 0;
                         c[c.length-1] += (third ? ',\n' : ', ');
                         c.push(commit_str);
+                    }
+                    if(users.includes(author_username) == false) {
+                        users.push(author_username);
                     }
                 });
                 $.each(all, function(index) {
@@ -152,6 +159,22 @@
                 result += '<a href="' + full_url + 'merge" target="_blank">merge</a></pre>';
             }
             $('#lm_gh_result').html(result);
+            users.forEach(function(author_username) {
+                if (author_username != '<null>') {
+                    $.ajax({
+                        url: 'https://api.github.com/users/'+author_username,
+                        complete: function(xhr) {
+                            var result = '';
+                            var json = xhr.responseJSON;
+                            if (json.message == 'Not Found') {
+                                $('#commit_user_' + author_username).html('<span style="color:red">User not found</span>');
+                            } else {
+                                $('#commit_user_' + author_username).html(json.name);
+                            }
+                        }
+                    });
+                }
+            });
         }
     }
     checkCommitters();
