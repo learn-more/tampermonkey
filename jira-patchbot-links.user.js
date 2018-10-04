@@ -2,8 +2,8 @@
 // @name         Patchbot links
 // @namespace    http://tampermonkey.net/
 // @version      0.2
-// @updateURL    https://raw.githubusercontent.com/learn-more/tampermonkey/master/jira-patchbot-links.js
-// @downloadURL  https://raw.githubusercontent.com/learn-more/tampermonkey/master/jira-patchbot-links.js
+// @updateURL    https://raw.githubusercontent.com/learn-more/tampermonkey/master/jira-patchbot-links.user.js
+// @downloadURL  https://raw.githubusercontent.com/learn-more/tampermonkey/master/jira-patchbot-links.user.js
 // @description  Add patchbot links on jira attachments
 // @author       Mark Jansen
 // @match        https://jira.reactos.org/browse/CORE-*
