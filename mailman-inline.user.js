@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Expand mailing list threaded view inline
 // @namespace    https://www.reactos.org/pipermail/ros-dev/
-// @version      0.3
+// @version      0.4
 // @updateURL    https://raw.githubusercontent.com/learn-more/tampermonkey/master/mailman-inline.user.js
 // @downloadURL  https://raw.githubusercontent.com/learn-more/tampermonkey/master/mailman-inline.user.js
 // @description  Expand 'threaded view' mailing lists inline

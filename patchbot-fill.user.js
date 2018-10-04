@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Patchbot fill in values
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @updateURL    https://raw.githubusercontent.com/learn-more/tampermonkey/master/patchbot-fill.user.js
 // @downloadURL  https://raw.githubusercontent.com/learn-more/tampermonkey/master/patchbot-fill.user.js
 // @description  Script accompanying 'github-pr-author.user.js' and 'jira-patchbot-links.user.js' to fill in patchbot values
