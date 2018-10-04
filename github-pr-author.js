@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         Github improvements
 // @namespace    http://tampermonkey.net/
-// @version      0.11
+// @version      0.13
 // @updateURL    https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.js
 // @downloadURL  https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.js
 // @description  Various github improvements, like: show committer and author name, 'known' authors, etc...
@@ -15,11 +15,12 @@
 (function() {
     'use strict';
 
-    /* template: '': [ [ '', '' ] ], */
     var known_users = {
         'Alexander Rechitskiy': [ [ 'rechitskiy', 'reactos.org' ] ],
         'Alexander Shaposhnikov': [ [ 'sanchaez', 'reactos.org' ] ],
         'Amine Khaldi': [ [ 'amine.khaldi', 'reactos.org' ] ],
+        'Baruch Rutman': [ [ 'peterooch', 'gmail.com' ] ],
+        'Bernhard Feichtinger': [ [ '43303168+biehdc', 'users.noreply.github.com' ] ],
         'Bișoc George': [ [ 'fraizeraust99', 'gmail.com' ] ],
         'Colin Finck': [ [ 'colin', 'reactos.org' ] ],
         'David Quintana': [ [ 'gigaherz', 'gmail.com' ] ],
@@ -44,6 +45,7 @@
         'Thomas Faber': [ [ 'thomas.faber', 'reactos.org' ] ],
         'Timo Kreuzer': [ [ 'timo.kreuzer', 'reactos.org' ] ],
         'Vadim Galyant': [ [ 'vgal', 'rambler.ru' ] ],
+        'Victor Perevertkin': [ [ 'victor', 'perevertkin.ru'] ],
     };
     function knownCommitter(user) {
         var name = user.name;
@@ -62,7 +64,7 @@
             return ' <span style="color:red; font-weight:bold;" title="Nickname">!</span>';
         }
 
-        return  ' ?';
+        return ' ?';
     }
 
     function checkCommitters() {
@@ -83,7 +85,7 @@
                     if (json.message == 'Not Found') {
                         $('#lm_gh_result').html('<span style="color:red">PR not found</span>');
                     } else {
-                        addCommits(json, pull_id[2]);
+                        addCommits(json, pull_id[2], pull_id[1]);
                     }
                 }
             });
@@ -113,7 +115,7 @@
             $('#lm_gh_result').html('<span>Querying</span>');
         }
 
-        function addCommits(commits, pull_id) {
+        function addCommits(commits, pull_id, pull_repo) {
             var result = '';
             var users = [];
             if(commits.length === 0) {
@@ -124,10 +126,8 @@
                     var commit_str = commits[index].sha.substring(0, 7);
                     var commit = commits[index].commit;
                     var author_obj = commits[index].author;
-                    var author_username = author_obj != null  ? author_obj.login : '<null>';
                     var author = 'A:<a href="mailto:' + commit.author.email + '">' + commit.author.name + '</a>' + knownCommitter(commit.author) + '\n';
-                    author +=    'C:<a href="mailto:' + commit.committer.email + '">' + commit.committer.name + '</a>' + knownCommitter(commit.committer) + '\n';
-                    author +=    'U:<a href="https://github.com/' + author_username + '" id="commit_user_' + author_username + '">???</a>';
+                    author +=    'C:<a href="mailto:' + commit.committer.email + '">' + commit.committer.name + '</a>' + knownCommitter(commit.committer);// + '\n';
 
                     var prev = $.grep(all, function(e) { return e.author == author; });
                     if (prev.length === 0) {
@@ -137,9 +137,6 @@
                         var third = (c.length % 3) === 0;
                         c[c.length-1] += (third ? ',\n' : ', ');
                         c.push(commit_str);
-                    }
-                    if(users.includes(author_username) == false) {
-                        users.push(author_username);
                     }
                 });
                 $.each(all, function(index) {
@@ -152,29 +149,35 @@
             }
             if (typeof pull_id !== "undefined") {
                 var full_url = 'https://build.reactos.org/builders/Build%20GCCLin_x86?force&pr_id=' + pull_id + '&pr_type=';
+                result += '<hr style="margin:0px" /><pre>PR:<a href="#" id="pr_user_link">???</a>';
                 result += '<hr style="margin:0px" /><pre>GCCLin: <a href="' + full_url + 'head" target="_blank">head</a>, ';
                 result += '<a href="' + full_url + 'merge" target="_blank">merge</a>\n';
                 full_url = 'https://build.reactos.org/builders/Test%20KVM%20AHK?force&pr_id=' + pull_id + '&pr_type=';
                 result += '   AHK: <a href="' + full_url + 'head" target="_blank">head</a>, ';
                 result += '<a href="' + full_url + 'merge" target="_blank">merge</a></pre>';
+                $.ajax({
+                    url: 'https://api.github.com/repos/reactos/' + pull_repo + '/pulls/'+pull_id,
+                    complete: function(xhr) {
+                        var json = xhr.responseJSON;
+                        if (json.message != 'Not Found') {
+                            var usrurl = json.user.url;
+                            $.ajax({
+                                url: usrurl,
+                                complete: function(xhr) {
+                                    var result = '';
+                                    var json = xhr.responseJSON;
+                                    if (json.message == 'Not Found') {
+                                        $('#pr_user_link').html('<span style="color:red">User not found</span>');
+                                    } else {
+                                        $('#pr_user_link').html(json.name).attr('href', json.html_url);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
             }
             $('#lm_gh_result').html(result);
-            users.forEach(function(author_username) {
-                if (author_username != '<null>') {
-                    $.ajax({
-                        url: 'https://api.github.com/users/'+author_username,
-                        complete: function(xhr) {
-                            var result = '';
-                            var json = xhr.responseJSON;
-                            if (json.message == 'Not Found') {
-                                $('#commit_user_' + author_username).html('<span style="color:red">User not found</span>');
-                            } else {
-                                $('#commit_user_' + author_username).html(json.name);
-                            }
-                        }
-                    });
-                }
-            });
         }
     }
     checkCommitters();
