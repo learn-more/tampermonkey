@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         Github improvements
 // @namespace    http://tampermonkey.net/
-// @version      0.15
+// @version      0.16
 // @updateURL    https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.user.js
 // @downloadURL  https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.user.js
 // @description  Various github improvements, like: show committer and author name, 'known' authors, etc...
@@ -15,7 +15,7 @@
 (function() {
     'use strict';
 
-    var known_users = {
+    const known_users = {
         'Alexander Rechitskiy': [ [ 'rechitskiy', 'reactos.org' ] ],
         'Alexander Shaposhnikov': [ [ 'sanchaez', 'reactos.org' ] ],
         'Amine Khaldi': [ [ 'amine.khaldi', 'reactos.org' ] ],
@@ -47,9 +47,15 @@
         'Vadim Galyant': [ [ 'vgal', 'rambler.ru' ] ],
         'Victor Perevertkin': [ [ 'victor', 'perevertkin.ru'] ],
     };
+    const TOKEN_KEY = 'lm-gh-improvements-token';
+    let token = localStorage.getItem(TOKEN_KEY);
+    let headers = {};
+    if (token) {
+        headers.Authorization = `token ${token}`;
+    }
     function knownCommitter(user) {
-        var name = user.name;
-        var email = user.email;
+        let name = user.name;
+        let email = user.email;
 
         var emails = known_users[name];
         if (emails) {
@@ -71,14 +77,15 @@
         /* Remove the old one */
         $('#lm_gh_result').remove();
 
-        var query = window.location.pathname;
-        var pull_regex = /reactos\/(.*)\/pull\/(\d+)/;
-        var pull_id = pull_regex.exec(query);
+        let query = window.location.pathname;
+        let pull_regex = /reactos\/(.*)\/pull\/(\d+)/;
+        let pull_id = pull_regex.exec(query);
 
         if (pull_id) {
             addBox();
             $.ajax({
                 url: 'https://api.github.com/repos/reactos/' + pull_id[1] + '/pulls/'+pull_id[2]+'/commits',
+                headers: headers,
                 complete: function(xhr) {
                     var result = '';
                     var json = xhr.responseJSON;
@@ -90,12 +97,13 @@
                 }
             });
         } else {
-            var commit_regex = /reactos\/commit\/([0-9a-f]+)/;
-            var commit_id = commit_regex.exec(query);
+            let commit_regex = /reactos\/commit\/([0-9a-f]+)/;
+            let commit_id = commit_regex.exec(query);
             if (commit_id) {
                 addBox();
                 $.ajax({
                     url: 'https://api.github.com/repos/reactos/reactos/commits/'+commit_id[1],
+                    headers: headers,
                     complete: function(xhr) {
                         var result = '';
                         var json = xhr.responseJSON;
@@ -110,37 +118,47 @@
         }
 
         function addBox() {
-            var box = $('<div id="lm_gh_result" style="position: fixed; top:54px; right:0px; border-left:1px solid #e1e4e8; border-bottom:1px solid #e1e4e8; background-color:#fafbfc; min-width:10px; min-height:10px;"/>');
+            let box = $('<div id="lm_gh_result" style="position: fixed; top:54px; right:0px; border-left:1px solid #e1e4e8; border-bottom:1px solid #e1e4e8; background-color:#fafbfc; min-width:10px; min-height:10px;"/>');
             $('body').append(box);
-            $('#lm_gh_result').html('<span>Querying</span>');
+            $('#lm_gh_result')
+                .html('<span>Querying</span>')
+                .dblclick(
+                function() {
+                    let newToken = prompt('Enter your token', token || '');
+                    if (newToken) {
+                        token = newToken.trim();
+                        localStorage.setItem(TOKEN_KEY, token);
+                        //alert("New token:" + newToken);
+                    }
+                 });
         }
 
         function addCommits(commits, pull_id, pull_repo) {
-            var result = '';
-            var users = [];
+            let result = '';
+            let users = [];
             if(commits.length === 0) {
                 result = '<span style="color:red">No commits found</span>';
             } else {
-                var all = [];
+                let all = [];
                 $.each(commits, function(index) {
-                    var commit_str = commits[index].sha.substring(0, 7);
-                    var commit = commits[index].commit;
-                    var author_obj = commits[index].author;
-                    var author = 'A:<a href="mailto:' + commit.author.email + '">' + commit.author.name + '</a>' + knownCommitter(commit.author) + '\n';
+                    let commit_str = commits[index].sha.substring(0, 7);
+                    let commit = commits[index].commit;
+                    let author_obj = commits[index].author;
+                    let author = 'A:<a href="mailto:' + commit.author.email + '">' + commit.author.name + '</a>' + knownCommitter(commit.author) + '\n';
                     author +=    'C:<a href="mailto:' + commit.committer.email + '">' + commit.committer.name + '</a>' + knownCommitter(commit.committer);// + '\n';
 
-                    var prev = $.grep(all, function(e) { return e.author == author; });
+                    let prev = $.grep(all, function(e) { return e.author == author; });
                     if (prev.length === 0) {
                         all.push({'commit': ['Commit: ', commit_str], 'author': author});
                     } else {
-                        var c = prev[0].commit;
-                        var third = (c.length % 3) === 0;
+                        let c = prev[0].commit;
+                        let third = (c.length % 3) === 0;
                         c[c.length-1] += (third ? ',\n' : ', ');
                         c.push(commit_str);
                     }
                 });
                 $.each(all, function(index) {
-                    var point = all[index];
+                    let point = all[index];
                     result += '<pre style="border-top:1px solid #e1e4e8">';
                     result += point.commit.join('') + '\n';
                     result += point.author;
@@ -148,7 +166,7 @@
                 });
             }
             if (typeof pull_id !== "undefined") {
-                var full_url = 'https://build.reactos.org/builders/Build%20GCCLin_x86?force&pr_id=' + pull_id + '&pr_type=';
+                let full_url = 'https://build.reactos.org/builders/Build%20GCCLin_x86?force&pr_id=' + pull_id + '&pr_type=';
                 result += '<hr style="margin:0px" /><pre>PR:<a href="#" id="pr_user_link">???</a>';
                 result += '<hr style="margin:0px" /><pre>GCCLin: <a href="' + full_url + 'head" target="_blank">head</a>, ';
                 result += '<a href="' + full_url + 'merge" target="_blank">merge</a>\n';
@@ -158,18 +176,19 @@
                 $.ajax({
                     url: 'https://api.github.com/repos/reactos/' + pull_repo + '/pulls/'+pull_id,
                     complete: function(xhr) {
-                        var json = xhr.responseJSON;
+                        let json = xhr.responseJSON;
                         if (json.message != 'Not Found') {
                             var usrurl = json.user.url;
                             $.ajax({
                                 url: usrurl,
+                                headers: headers,
                                 complete: function(xhr) {
                                     var result = '';
                                     var json = xhr.responseJSON;
                                     if (json.message == 'Not Found') {
                                         $('#pr_user_link').html('<span style="color:red">User not found</span>');
                                     } else {
-                                        $('#pr_user_link').html(json.name).attr('href', json.html_url);
+                                        $('#pr_user_link').html(json.name || 'no public name').attr('href', json.html_url);
                                     }
                                 }
                             });
