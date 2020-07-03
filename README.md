@@ -7,6 +7,7 @@
 * Show 'known' email addresses for listed users
 * Show 'mismatching' email addresses for listed users
 * Show PR author
+* Use github api key (Doubleclick the overlay)
 
 ![Example](https://raw.githubusercontent.com/learn-more/tampermonkey/master/img/github-pr-author.png "Example")
 
