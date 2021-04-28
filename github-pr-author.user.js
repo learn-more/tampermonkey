@@ -118,7 +118,7 @@
         }
 
         function addBox() {
-            let box = $('<div id="lm_gh_result" style="position: fixed; top:54px; right:0px; border-left:1px solid #e1e4e8; border-bottom:1px solid #e1e4e8; background-color:#fafbfc; min-width:10px; min-height:10px;"/>');
+            let box = $('<div id="lm_gh_result" style="position: fixed; top:54px; right:0px; border-left:1px solid var(--color-border-secondary); border-bottom:1px solid var(--color-border-secondary); background-color:var(--color-bg-secondary); min-width:10px; min-height:10px;"/>');
             $('body').append(box);
             $('#lm_gh_result')
                 .html('<span>Querying</span>')
@@ -159,7 +159,7 @@
                 });
                 $.each(all, function(index) {
                     let point = all[index];
-                    result += '<pre style="border-top:1px solid #e1e4e8">';
+                    result += '<pre style="border-top:1px solid var(--color-border-secondary)">';
                     result += point.commit.join('') + '\n';
                     result += point.author;
                     result += '</pre>';
