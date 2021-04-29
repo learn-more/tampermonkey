@@ -30,6 +30,7 @@
         'GitHub': [ [ 'noreply', 'github.com' ] ],
         'Hermès Bélusca-Maïto': [ [ 'hermes.belusca-maito', 'reactos.org' ] ],
         'Hermès BÉLUSCA - MAÏTO': [ [ 'hermes.belusca-maito', 'reactos.org' ] ],
+        '赫杨': [ [ '1160386205', 'qq.com' ] ],
         'James Tabor': [ [ 'james.tabor', 'reactos.org' ] ],
         'Jérôme Gardou': [ [ 'jerome.gardou', 'reactos.org' ] ],
         'Joachim Henze': [ [ 'Joachim.Henze', 'reactos.org' ] ],
@@ -45,7 +46,7 @@
         'Thomas Faber': [ [ 'thomas.faber', 'reactos.org' ] ],
         'Timo Kreuzer': [ [ 'timo.kreuzer', 'reactos.org' ] ],
         'Vadim Galyant': [ [ 'vgal', 'rambler.ru' ] ],
-        'Victor Perevertkin': [ [ 'victor', 'perevertkin.ru'] ],
+        'Victor Perevertkin': [ [ 'victor.perevertkin', 'reactos.org'] ],
     };
     const TOKEN_KEY = 'lm-gh-improvements-token';
     let token = localStorage.getItem(TOKEN_KEY);
@@ -118,7 +119,7 @@
         }
 
         function addBox() {
-            let box = $('<div id="lm_gh_result" style="position: fixed; top:54px; right:0px; border-left:1px solid var(--color-border-secondary); border-bottom:1px solid var(--color-border-secondary); background-color:var(--color-bg-secondary); min-width:10px; min-height:10px;"/>');
+            let box = $('<div id="lm_gh_result" style="position: fixed; top:164px; right:0px; border-left:1px solid var(--color-border-secondary); border-bottom:1px solid var(--color-border-secondary); background-color:var(--color-bg-secondary); min-width:10px; min-height:10px;"/>');
             $('body').append(box);
             $('#lm_gh_result')
                 .html('<span>Querying</span>')
