@@ -1,5 +1,12 @@
 # Various tampermonkey scripts
 
+## ['Old New Thing' link fixup](../../raw/master/old-new-thing.user.js)
+* Fix links on [The Old New Thing](https://devblogs.microsoft.com/oldnewthing/)
+* Display the original links
+
+![Example](https://raw.githubusercontent.com/learn-more/tampermonkey/master/img/old-new-thing.png "Example")
+
+
 ## [Github improvements](../../raw/master/github-pr-author.user.js)
 
 * Show commits, grouped by author + committer
