@@ -1,5 +1,7 @@
 # Various tampermonkey scripts
 
+Install them by clicking on the script title you want, and then clicking the 'install' button in the tampermonkey page that should open.
+
 ## ['Old New Thing' link fixup](../../raw/master/old-new-thing.user.js)
 * Fix links on [The Old New Thing](https://devblogs.microsoft.com/oldnewthing/)
 * Display the original links
