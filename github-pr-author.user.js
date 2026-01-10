@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         Github improvements
 // @namespace    http://tampermonkey.net/
-// @version      0.17
+// @version      0.18
 // @updateURL    https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.user.js
 // @downloadURL  https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.user.js
 // @description  Various github improvements, like: show committer and author name, 'known' authors, etc...
@@ -47,6 +47,7 @@
         'Timo Kreuzer': [ [ 'timo.kreuzer', 'reactos.org' ] ],
         'Vadim Galyant': [ [ 'vgal', 'rambler.ru' ] ],
         'Victor Perevertkin': [ [ 'victor.perevertkin', 'reactos.org'] ],
+        'Vitaly Orekhov': [ [ 'vkvo2000', 'vivaldi.net'] ],
     };
     const TOKEN_KEY = 'lm-gh-improvements-token';
     let token = localStorage.getItem(TOKEN_KEY);
@@ -203,3 +204,4 @@
     checkCommitters();
     $(document).on('pjax:end', checkCommitters);
 })();
+
