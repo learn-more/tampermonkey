@@ -47,6 +47,7 @@
         'Timo Kreuzer': [ [ 'timo.kreuzer', 'reactos.org' ] ],
         'Vadim Galyant': [ [ 'vgal', 'rambler.ru' ] ],
         'Victor Perevertkin': [ [ 'victor.perevertkin', 'reactos.org'] ],
+        'Vitaly Orekhov': [ [ 'vkvo2000', 'vivaldi.net'] ],
     };
     const TOKEN_KEY = 'lm-gh-improvements-token';
     let token = localStorage.getItem(TOKEN_KEY);
@@ -203,3 +204,4 @@
     checkCommitters();
     $(document).on('pjax:end', checkCommitters);
 })();
+
