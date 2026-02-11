@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         Github improvements
 // @namespace    http://tampermonkey.net/
-// @version      0.18
+// @version      0.19
 // @updateURL    https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.user.js
 // @downloadURL  https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.user.js
 // @description  Various github improvements, like: show committer and author name, 'known' authors, etc...
@@ -23,7 +23,9 @@
         'Bernhard Feichtinger': [ [ '43303168+biehdc', 'users.noreply.github.com' ] ],
         'Bișoc George': [ [ 'fraizeraust99', 'gmail.com' ] ],
         'Colin Finck': [ [ 'colin', 'reactos.org' ] ],
+        'Carl J. Bialorucki': [ [ 'carl.bialorucki', 'reactos.org' ] ],
         'David Quintana': [ [ 'gigaherz', 'gmail.com' ] ],
+        'Doug Lyons': [ [ 'douglyons', 'douglyons.com' ] ],
         'Eric Kohl': [ [ 'eric.kohl', 'reactos.org' ] ],
         'Ged Murphy': [ [ 'gedmurphy', 'reactos.org' ] ],
         'Giannis Adamopoulos': [ [ 'gadamopoulos', 'reactos.org' ] ],
@@ -34,11 +36,14 @@
         'James Tabor': [ [ 'james.tabor', 'reactos.org' ] ],
         'Jérôme Gardou': [ [ 'jerome.gardou', 'reactos.org' ] ],
         'Joachim Henze': [ [ 'Joachim.Henze', 'reactos.org' ] ],
+        'Johannes Anderwald': [ [ 'johannes.anderwald', 'reactos.org'] ],
+        'Justin Miller': [ [ 'justin.miller', 'reactos.org' ] ],
         'Katayama Hirofumi MZ': [ [ 'katayama.hirofumi.mz', 'gmail.com'] ],
         'Lauri Ojansivu': [ [ 'x', 'xet7.org' ] ],
         'Luo Yufan': [ [ 'njlyf2011', 'hotmail.com' ] ],
         'Manuel Bachmann': [ [ 'tarnyko', 'tarnyko.net' ] ],
         'Mark Jansen': [ [ 'mark.jansen', 'reactos.org' ] ],
+        'Oleg Dubinskiy': [ [ 'oleg.dubinskiy', 'reactos.org' ] ],
         'Pierre Schweitzer': [ [ 'pierre', 'reactos.org' ] ],
         'Samuel Serapion': [ [ 'samcharly', 'hotmail.com' ] ],
         'Serge Gautherie': [ ['reactos-git_serge_171003', 'gautherie.fr'] ],
