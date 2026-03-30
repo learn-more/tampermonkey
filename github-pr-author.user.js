@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         Github improvements
 // @namespace    http://tampermonkey.net/
-// @version      0.19
+// @version      0.20
 // @updateURL    https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.user.js
 // @downloadURL  https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.user.js
 // @description  Various github improvements, like: show committer and author name, 'known' authors, etc...
@@ -24,7 +24,9 @@
         'Bișoc George': [ [ 'fraizeraust99', 'gmail.com' ] ],
         'Colin Finck': [ [ 'colin', 'reactos.org' ] ],
         'Carl J. Bialorucki': [ [ 'carl.bialorucki', 'reactos.org' ] ],
+        'Daniel Victor': [ [ 'ilauncherdeveloper', 'gmail.com' ] ],
         'David Quintana': [ [ 'gigaherz', 'gmail.com' ] ],
+        'Dmitry Borisov': [ [ 'di.sean', 'protonmail.com' ] ],
         'Doug Lyons': [ [ 'douglyons', 'douglyons.com' ] ],
         'Eric Kohl': [ [ 'eric.kohl', 'reactos.org' ] ],
         'Ged Murphy': [ [ 'gedmurphy', 'reactos.org' ] ],
@@ -43,6 +45,7 @@
         'Luo Yufan': [ [ 'njlyf2011', 'hotmail.com' ] ],
         'Manuel Bachmann': [ [ 'tarnyko', 'tarnyko.net' ] ],
         'Mark Jansen': [ [ 'mark.jansen', 'reactos.org' ] ],
+        'Mikhail Tyukin': [ [ 'mishakeys20', 'gmail.com' ] ],
         'Oleg Dubinskiy': [ [ 'oleg.dubinskiy', 'reactos.org' ] ],
         'Pierre Schweitzer': [ [ 'pierre', 'reactos.org' ] ],
         'Samuel Serapion': [ [ 'samcharly', 'hotmail.com' ] ],
