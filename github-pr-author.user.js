@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         Github improvements
 // @namespace    http://tampermonkey.net/
-// @version      0.40
+// @version      0.41
 // @updateURL    https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.user.js
 // @downloadURL  https://raw.githubusercontent.com/learn-more/tampermonkey/master/github-pr-author.user.js
 // @description  Show committer/author info on ReactOS PRs and commits
@@ -16,6 +16,7 @@
     const KNOWN = {
         'Alexander Rechitskiy':  [['rechitskiy',               'reactos.org']],
         'Alexander Shaposhnikov':[['sanchaez',                  'reactos.org']],
+        'Alex Mendoza':          [['05alex.mendozaa',           'gmail.com']],
         'Amine Khaldi':          [['amine.khaldi',              'reactos.org']],
         'Baruch Rutman':         [['peterooch',                 'gmail.com']],
         'Bernhard Feichtinger':  [['43303168+biehdc',           'users.noreply.github.com']],
@@ -43,6 +44,8 @@
         'Luo Yufan':             [['njlyf2011',                 'hotmail.com']],
         'Manuel Bachmann':       [['tarnyko',                   'tarnyko.net']],
         'Mark Jansen':           [['mark.jansen',               'reactos.org']],
+        'Max Korostil':          [['mrmks04',                   'yandex.ru']],
+        'Mohammad Amin Mollazadeh': [['madamin',                'proton.me']],
         'Mikhail Tyukin':        [['mishakeys20',               'gmail.com']],
         'Oleg Dubinskiy':        [['oleg.dubinskiy',            'reactos.org']],
         'Pierre Schweitzer':     [['pierre',                    'reactos.org']],
@@ -54,6 +57,7 @@
         'Vadim Galyant':         [['vgal',                      'rambler.ru']],
         'Victor Perevertkin':    [['victor.perevertkin',        'reactos.org']],
         'Vitaly Orekhov':        [['vkvo2000',                  'vivaldi.net']],
+        'William Kent':          [['wjk011',                    'gmail.com']],
     };
 
     const TOKEN_KEY = 'lm-gh-improvements-token';
